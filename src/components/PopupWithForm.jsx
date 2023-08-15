@@ -1,8 +1,5 @@
-import {useEffect} from "react";
 
 function PopupWithForm(props) {
-
-
 
     return (
         <div className={props.isOpen ? `popup popup_type_${props.name} popup_opened` : `popup popup_type_${props.name}`}>

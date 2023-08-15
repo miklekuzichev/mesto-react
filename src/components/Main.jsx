@@ -1,17 +1,11 @@
 import React from 'react';
 import {api} from '../utils/Api';
+import Card from './Card';
 
-
-
-
-function Main({onEditProfile, onAddPlace, onEditAvatar}) {
-
+function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
 
     const [userData, setUserData] = React.useState({});
     const [cards, setCards] = React.useState([]);
-    //const [initialCard, setInitialCard] = React.useState([]);
-    //const [userDescription, setUserDescription] = React.useState({});
-    //const [userAvatar, setUserAvatar] = React.useState({});
 
    React.useEffect(() => {
     //
@@ -26,8 +20,6 @@ function Main({onEditProfile, onAddPlace, onEditAvatar}) {
 
    }, []);
 
-//   console.log('userData ', userData.avatar);
-   console.log('cards ', cards);
    const { name, about, avatar } = userData;
 
     return (
@@ -47,30 +39,16 @@ function Main({onEditProfile, onAddPlace, onEditAvatar}) {
                 <button type="button" className="profile__add-button" onClick={onAddPlace}>
                 </button>
             </section>
-
             <section className="cards" aria-label="Галерея картинок">
                 {cards.map((card) => {
                     return (
-                        <article className="card">
-                        <button type="button" className="card__open-image">
-                            <img className="card__image" alt={card.name} src={card.link}/>
-                        </button>
-                        <button type="button" className="card__delete"></button>
-                        <div className="card__subcard">
-                            <h2 className="card__text">{card.name}
-                            </h2>
-                            <div className="card__heart-container">
-                                <button type="button" className="card__heart-button"></button>
-                                <span className="card__heart-counter">{card.likes.length}</span>
-                            </div>
-                        </div>
-                    </article>        
+                        <Card 
+                        card={card}
+                        onCardClick={onCardClick}
+                        />
                     );
-                })}  
-                
+                })}
             </section>
-
-
         </main>
     );
 }
