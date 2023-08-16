@@ -29,5 +29,5 @@
 * npm install
 * npm start
 
-Ссылка на проект: [gh-pages](https://miklekuzichev.github.io/mesto/index.html).
+Ссылка на проект: [gh-pages](https://miklekuzichev.github.io/mesto-react/index.html).
 
