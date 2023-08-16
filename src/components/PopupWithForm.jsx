@@ -7,9 +7,12 @@ function PopupWithForm(props) {
                 <button type="button" className="popup__close" onClick={props.onClose}></button>
                 <h2 className="popup__title">{props.title}</h2>
                 <form method="GET" name={props.name} action="#" className='popup__form' noValidate>
-                    <fieldset className="popup__fieldset">
+                    <div className="popup__fieldset">
                         {props.children}
-                    </fieldset>
+                        <button type='submit' className="popup__button">
+                            {props.buttonText}
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
