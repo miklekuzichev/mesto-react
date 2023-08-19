@@ -8,7 +8,7 @@ function AddPlacePopup(props) {
             isOpen={props.isOpen}
             onClose={props.onClose}
             name={props.name}
-            title={props.title}
+            title='Новое место'
             buttonText='Создать'
             >
             <input type='text' name="imagename" id="imageName" placeholder="Название" minLength="2" maxLength="30" className="popup__input popup__input_type_imagename" required/>

@@ -12,7 +12,6 @@ function App() {
 
     const [selectedCard, setSelectedCard] = React.useState({});
     const [name, setName] = React.useState('');
-    const [title, setTitle] = React.useState('');
 
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
     const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
@@ -25,20 +24,17 @@ function App() {
 
     const handleEditAvatarClick = () => {
         setName('edit-profile');
-        setTitle('Обновить аватар');
-        setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
+        setIsEditAvatarPopupOpen(true);
     };
 
     const handleEditProfileClick = () => {
         setName('type_edit');
-        setTitle('Редактировать профиль');
-        setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
+        setIsEditProfilePopupOpen(true);
     };
 
     const handleAddPlaceClick = () => {
         setName('type_add');
-        setTitle('Новое место');
-        setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
+        setIsAddPlacePopupOpen(true);
     };
 
     const closeAllPopups = () => {
@@ -68,21 +64,18 @@ function App() {
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
           name={name}
-          title={title}
         />
 
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
           name={name}
-          title={title}
         />
 
         <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
           name={name}
-          title={title}
         />
 
     </div>

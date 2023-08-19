@@ -8,7 +8,7 @@ function EditAvatarPopup(props) {
             isOpen={props.isOpen}
             onClose={props.onClose}
             name={props.name}
-            title={props.title}
+            title='Обновить аватар'
             buttonText='Сохранить'
             >
             <input type='url' name="imagelink" id="imageLinkProfile" placeholder="Ссылка на картинку" className="popup__input popup__input_type_imageurl" required/>
