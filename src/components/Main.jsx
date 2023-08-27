@@ -1,13 +1,16 @@
-import React from 'react';
-import api from '../utils/api.js';
+import React, { useContext } from 'react';
+//import api from '../utils/api.js';
 import Card from './Card';
+import { CurrentUserContext } from '../context/CurrentUserContext.js'
 
-function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
+function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick, handleDeleteCard, onCardLike, cards}) {
 
-    const [userData, setUserData] = React.useState({});
-    const [cards, setCards] = React.useState([]);
+    //const [userData, setUserData] = React.useState({});
+    //const [cards, setCards] = React.useState([]);
+    const currentUser = useContext(CurrentUserContext);
+    const { name, about, avatar } = currentUser;
 
-   React.useEffect(() => {
+   /*React.useEffect(() => {
     //
     // Загрузка готовых карточек и данных о пользователе с сервера
     //
@@ -21,7 +24,7 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
    }, []);
 
 
-   const { name, about, avatar } = userData;
+   const { name, about, avatar } = userData;*/
 
     return (
         <main>
@@ -47,6 +50,8 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
                         key={card._id}
                         card={card}
                         onCardClick={onCardClick}
+                        handleDeleteCard={handleDeleteCard}
+                        onCardLike={onCardLike}
                         />
                     );
                 })}

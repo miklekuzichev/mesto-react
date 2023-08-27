@@ -7,7 +7,7 @@ import AddPlacePopup from './AddPlacePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import EditProfilePopup from './EditProfilePopup';
 import api from '../utils/api.js';
-import CurrentUserContext from '../context/CurrentUserContext.js'
+import { CurrentUserContext } from '../context/CurrentUserContext.js'
 
 function App() {
 
@@ -19,7 +19,7 @@ function App() {
     const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
 
     const [currentUser, setcurrentUser] = React.useState([]); // default value
-    
+    const [cards, setCards] = React.useState([]);
   //api.getUserInfo
 
   React.useEffect(() => {
@@ -29,6 +29,7 @@ function App() {
         Promise.all([api.getInitialCards(), api.getUserInfo()])
         .then(([cards, userData]) => {
             setcurrentUser(userData);
+            setCards(cards);
         })
         .catch(console.error);
 
@@ -37,6 +38,22 @@ function App() {
     const handleCardClick = (card) => {
         setSelectedCard(card);
     };
+
+    function handleCardLike(card) {
+      const isLiked = card.likes.some(i => i._id === currentUser._id); // Проверяем, есть ли уже лайк на этой карточке
+      // Отправляем запрос в API и получаем обновлённые данные карточки
+      api.changeLikeCardStatus(card._id, !isLiked)
+      .then((newCard) => {
+          setCards((state) => state.map((item) => item._id === card._id ? newCard : item));
+      })
+      .catch(console.error);
+  } 
+
+    const [CardDeleteClick, setCardDeleteClick] = React.useState('');
+    const handleDeleteCard = (card) => {
+      setCardDeleteClick(card._id);
+    }
+
 
     const handleEditAvatarClick = () => {
         setName('edit-profile');
@@ -69,7 +86,10 @@ function App() {
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
           onEditAvatar={handleEditAvatarClick}
-          onCardClick={handleCardClick} 
+          onCardClick={handleCardClick}
+          handleDeleteCard={handleDeleteCard}
+          cards={cards}
+          onCardLike={handleCardLike}
           />
           <Footer />
           <ImagePopup 
