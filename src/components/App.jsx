@@ -17,6 +17,9 @@ function App() {
     const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
     const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
 
+    const [currentUser, setcurrentUser] = React.useState([]); // default value
+    
+
 
     const handleCardClick = (card) => {
         setSelectedCard(card);
