@@ -20,6 +20,7 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
 
    }, []);
 
+
    const { name, about, avatar } = userData;
 
     return (
