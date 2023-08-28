@@ -49,10 +49,21 @@ function App() {
       .catch(console.error);
   } 
 
-    const [CardDeleteClick, setCardDeleteClick] = React.useState('');
-    const handleDeleteClick = (card) => {
-      setCardDeleteClick(card._id);
-    }
+    //const [CardDeleteClick, setCardDeleteClick] = React.useState('');
+    //const handleDeleteClick = (card) => {
+    //  setCardDeleteClick(card._id);
+    //}
+
+    function handleCardDelete(card) {
+      // Отправляем запрос в API и получаем обновлённые данные карточки
+      api.deleteCard(card._id)
+      .then(() => {
+          setCards((cards) => cards.filter((item) => item._id !== card));
+      })
+      .catch(console.error);
+  } 
+
+
 
 
     const handleEditAvatarClick = () => {
@@ -87,7 +98,7 @@ function App() {
           onAddPlace={handleAddPlaceClick}
           onEditAvatar={handleEditAvatarClick}
           onCardClick={handleCardClick}
-          handleDeleteClick={handleDeleteClick}
+          onCardDelete={handleCardDelete}
           cards={cards}
           onCardLike={handleCardLike}
           />
