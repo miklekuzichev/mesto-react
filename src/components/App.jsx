@@ -50,7 +50,7 @@ function App() {
   } 
 
     const [CardDeleteClick, setCardDeleteClick] = React.useState('');
-    const handleDeleteCard = (card) => {
+    const handleDeleteClick = (card) => {
       setCardDeleteClick(card._id);
     }
 
@@ -87,7 +87,7 @@ function App() {
           onAddPlace={handleAddPlaceClick}
           onEditAvatar={handleEditAvatarClick}
           onCardClick={handleCardClick}
-          handleDeleteCard={handleDeleteCard}
+          handleDeleteClick={handleDeleteClick}
           cards={cards}
           onCardLike={handleCardLike}
           />

@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import Card from './Card';
 import { CurrentUserContext } from '../context/CurrentUserContext.js'
 
-function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick, handleDeleteCard, onCardLike, cards}) {
+function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick, handleDeleteClick, onCardLike, cards}) {
 
     //const [userData, setUserData] = React.useState({});
     //const [cards, setCards] = React.useState([]);
@@ -50,7 +50,7 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick, handleDelet
                         key={card._id}
                         card={card}
                         onCardClick={onCardClick}
-                        handleDeleteCard={handleDeleteCard}
+                        handleDeleteClick={handleDeleteClick}
                         onCardLike={onCardLike}
                         />
                     );
