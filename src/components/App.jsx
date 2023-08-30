@@ -18,7 +18,7 @@ function App() {
     const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
     const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
 
-    const [currentUser, setcurrentUser] = React.useState([]); // default value
+    const [currentUser, setCurrentUser] = React.useState(CurrentUserContext); // default value
     const [cards, setCards] = React.useState([]);
   //api.getUserInfo
 
@@ -28,7 +28,7 @@ function App() {
     //
         Promise.all([api.getInitialCards(), api.getUserInfo()])
         .then(([cards, userData]) => {
-            setcurrentUser(userData);
+            setCurrentUser(userData);
             setCards(cards);
         })
         .catch(console.error);
@@ -89,6 +89,19 @@ function App() {
     };
 
 
+
+    function handleUpdateUser(userData) {
+      
+      api.editUserInfo(userData) 
+        .then((data) => {
+          setCurrentUser(data);
+          closeAllPopups();
+        })
+        .catch(console.error)
+        //.finally(() => renderLoading())
+    };
+    
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -124,6 +137,7 @@ function App() {
             isOpen={isEditProfilePopupOpen}
             onClose={closeAllPopups}
             name={name}
+            onUpdateUser={handleUpdateUser}
           />
 
       </div>
