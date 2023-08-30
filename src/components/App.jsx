@@ -49,10 +49,7 @@ function App() {
       .catch(console.error);
   } 
 
-    //const [CardDeleteClick, setCardDeleteClick] = React.useState('');
-    //const handleDeleteClick = (card) => {
-    //  setCardDeleteClick(card._id);
-    //}
+  
 
     function handleCardDelete(card) {
       // Отправляем запрос в API и получаем обновлённые данные карточки
@@ -101,6 +98,20 @@ function App() {
         //.finally(() => renderLoading())
     };
     
+    function handleUpdateAvatar(userAvatar) {
+      api.editAvatar(userAvatar)
+        .then((data) => {
+          setCurrentUser(data);
+          closeAllPopups();
+        })
+        .catch(console.error)
+        //.finally(() => renderLoading())
+    };
+
+
+
+
+
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -130,6 +141,7 @@ function App() {
           <EditAvatarPopup
             isOpen={isEditAvatarPopupOpen}
             onClose={closeAllPopups}
+            onUpdateAvatar={handleUpdateAvatar}
             name={name}
           />
 
