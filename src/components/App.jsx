@@ -20,6 +20,8 @@ function App() {
 
     const [currentUser, setCurrentUser] = React.useState(CurrentUserContext); // default value
     const [cards, setCards] = React.useState([]);
+
+    const [isRenderLoading, setIsRenderLoading] = React.useState(false);
   //api.getUserInfo
 
   React.useEffect(() => {
@@ -39,17 +41,21 @@ function App() {
         setSelectedCard(card);
     };
 
+    function renderLoading() {
+      setIsRenderLoading((isRenderLoading) => !isRenderLoading);
+    };
+
+
+
     function handleCardLike(card) {
       const isLiked = card.likes.some(i => i._id === currentUser._id); // Проверяем, есть ли уже лайк на этой карточке
       // Отправляем запрос в API и получаем обновлённые данные карточки
-      api.changeLikeCardStatus(card._id, !isLiked)
+      api.makeLike(card._id, !isLiked)
       .then((newCard) => {
           setCards((state) => state.map((item) => item._id === card._id ? newCard : item));
       })
       .catch(console.error);
   } 
-
-  
 
     function handleCardDelete(card) {
       // Отправляем запрос в API и получаем обновлённые данные карточки
@@ -58,9 +64,17 @@ function App() {
           setCards((cards) => cards.filter((item) => item._id !== card));
       })
       .catch(console.error);
-  } 
+    } 
 
-
+    function handleAddPlaceSubmit (card) {
+      // Отправляем запрос в API
+      api.addCard(card)
+      .then((card) => {
+        setCards([card, ...cards]);
+        closeAllPopups();
+      })
+      .catch(console.error);
+    } 
 
 
     const handleEditAvatarClick = () => {
@@ -105,7 +119,7 @@ function App() {
           closeAllPopups();
         })
         .catch(console.error)
-        //.finally(() => renderLoading())
+        .finally(() => renderLoading())
     };
 
 
@@ -136,6 +150,7 @@ function App() {
             isOpen={isAddPlacePopupOpen}
             onClose={closeAllPopups}
             name={name}
+            onAddPlace={handleAddPlaceSubmit}
           />
 
           <EditAvatarPopup
@@ -143,6 +158,7 @@ function App() {
             onClose={closeAllPopups}
             onUpdateAvatar={handleUpdateAvatar}
             name={name}
+            isRenderLoading={isRenderLoading}
           />
 
           <EditProfilePopup
@@ -150,6 +166,7 @@ function App() {
             onClose={closeAllPopups}
             name={name}
             onUpdateUser={handleUpdateUser}
+            isRenderLoading={isRenderLoading}
           />
 
       </div>

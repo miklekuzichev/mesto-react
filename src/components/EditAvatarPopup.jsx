@@ -28,6 +28,8 @@ function EditAvatarPopup(props) {
             title='Обновить аватар'
             buttonText='Сохранить'
             onSubmit={handleSubmit}
+            isRenderLoading={props.isRenderLoading}
+            renderButtonText='Загрузка...'
             >
             <input type='url' name="imagelink" id="imageLinkProfile" ref={avatarRef} placeholder="Ссылка на картинку" className="popup__input popup__input_type_imageurl" required/>
             <span className="popup__error imageLinkProfile-error"></span>

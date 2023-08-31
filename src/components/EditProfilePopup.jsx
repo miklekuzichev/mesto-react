@@ -47,6 +47,8 @@ function EditProfilePopup(props) {
             title='Редактировать профиль'
             buttonText='Сохранить'
             onSubmit={handleSubmit}
+            isRenderLoading={props.isRenderLoading}
+            renderButtonText='Загрузка...'
             >
             <input type='text' name="username" id="name" value={name} onChange={handleChangeName} placeholder="Иван Иванов" minLength="2" maxLength="40" className="popup__input popup__input_type_name" required/>
             <span className="popup__error name-error"></span>

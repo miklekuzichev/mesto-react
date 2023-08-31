@@ -10,7 +10,7 @@ function PopupWithForm(props) {
                     <div className="popup__fieldset">
                         {props.children}
                         <button type='submit' className="popup__button">
-                            {props.buttonText}
+                            {props.isRenderLoading ? props.renderButtonText : props.buttonText}
                         </button>
                     </div>
                 </form>
