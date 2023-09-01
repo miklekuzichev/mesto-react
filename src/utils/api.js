@@ -57,8 +57,8 @@ class Api {
     { method: 'POST',
       headers: this._headers,
       body: JSON.stringify(
-        {name: data.imagename,
-          link: data.imagelink
+        {name: data.imageName,
+          link: data.imageLink
         }) 
     });
   }
@@ -70,8 +70,8 @@ class Api {
     { method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify(
-        {name: data.username,
-          about: data.userprofile
+        {name: data.name,
+          about: data.about
         })
     });
   }

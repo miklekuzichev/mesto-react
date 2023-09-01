@@ -75,6 +75,7 @@ function App() {
     } 
 
     function handleAddPlaceSubmit (card) {
+      renderLoading();
       // Отправляем запрос в API
       api.addCard(card)
       .then((card) => {
@@ -87,17 +88,14 @@ function App() {
 
 
     const handleEditAvatarClick = () => {
-        //setName('edit-profile');
         setIsEditAvatarPopupOpen(true);
     };
 
     const handleEditProfileClick = () => {
-        //setName('type_edit');
         setIsEditProfilePopupOpen(true);
     };
 
     const handleAddPlaceClick = () => {
-        //setName('type_add');
         setIsAddPlacePopupOpen(true);
     };
 
@@ -109,7 +107,7 @@ function App() {
     };
 
     function handleUpdateUser(userData) {
-      
+      renderLoading();
       api.editUserInfo(userData) 
         .then((data) => {
           setCurrentUser(data);
@@ -120,6 +118,7 @@ function App() {
     };
     
     function handleUpdateAvatar(userAvatar) {
+      renderLoading();
       api.editAvatar(userAvatar)
         .then((data) => {
           setCurrentUser(data);

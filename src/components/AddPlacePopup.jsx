@@ -4,28 +4,28 @@ import React from "react";
 
 function AddPlacePopup(props) {
     
-  const [imagename, setImagename] = React.useState('');
-  const [imagelink, setImagelink] = React.useState('');
+  const [imageName, setImageName] = React.useState('');
+  const [imageLink, setImageLink] = React.useState('');
   
   function handleSubmit(evt) {
     evt.preventDefault();
     props.onAddPlace({
-      imagename,
-      imagelink
+      imageName,
+      imageLink
     });
   }
 
   function handlleImageNameChange(evt) {
-    setImagename(evt.target.value);
+    setImageName(evt.target.value);
   }
 
   function handleImageLinkChange(evt) {
-    setImagelink(evt.target.value);
+    setImageLink(evt.target.value);
   }
 
   React.useEffect(() => {
-    setImagename('');
-    setImagelink('');
+    setImageName('');
+    setImageLink('');
   }, [props.isOpen])
 
     return (
@@ -40,9 +40,9 @@ function AddPlacePopup(props) {
             renderButtonText='Загрузка...'
             isRenderLoading={props.isRenderLoading}
             >
-            <input type='text' name="imagename" onChange={handlleImageNameChange} value={imagename} id="imageName" placeholder="Название" minLength="2" maxLength="30" className="popup__input popup__input_type_imagename" required/>
+            <input type='text' name="imagename" onChange={handlleImageNameChange} value={imageName} id="imageName" placeholder="Название" minLength="2" maxLength="30" className="popup__input popup__input_type_imagename" required/>
             <span className="popup__error imageName-error"></span>
-            <input type='url' name="imagelink" onChange={handleImageLinkChange} value={imagelink} id="imageLink" placeholder="Ссылка на картинку" className="popup__input popup__input_type_imageurl" required/>
+            <input type='url' name="imagelink" onChange={handleImageLinkChange} value={imageLink} id="imageLink" placeholder="Ссылка на картинку" className="popup__input popup__input_type_imageurl" required/>
             <span className="popup__error imageLink-error"></span>
         </PopupWithForm>
 
