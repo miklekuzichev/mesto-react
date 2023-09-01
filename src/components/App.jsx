@@ -12,17 +12,16 @@ import { CurrentUserContext } from '../context/CurrentUserContext.js'
 function App() {
 
     const [selectedCard, setSelectedCard] = React.useState({});
-    const [name, setName] = React.useState('');
+    //const [name, setName] = React.useState('');
 
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
     const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
     const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
 
-    const [currentUser, setCurrentUser] = React.useState(CurrentUserContext); // default value
+    const [currentUser, setCurrentUser] = React.useState({}); // default value
     const [cards, setCards] = React.useState([]);
 
     const [isRenderLoading, setIsRenderLoading] = React.useState(false);
-  //api.getUserInfo
 
   React.useEffect(() => {
     //
@@ -62,18 +61,17 @@ function App() {
           setCards((state) => state.map((item) => item._id === card._id ? newCard : item));
         })
         .catch(console.error);
-      }
-      
+      }  
   } 
 
     function handleCardDelete(card) {
       // Отправляем запрос в API и получаем обновлённые данные карточки
-      console.log('card._id ', card._id);
       api.deleteCard(card._id)
       .then(() => {
           setCards((cards) => cards.filter((item) => item._id !== card));
       })
-      .catch(console.error);
+      .catch(console.error)
+//    .finally(() => renderLoading())
     } 
 
     function handleAddPlaceSubmit (card) {
@@ -83,22 +81,23 @@ function App() {
         setCards([card, ...cards]);
         closeAllPopups();
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => renderLoading())
     } 
 
 
     const handleEditAvatarClick = () => {
-        setName('edit-profile');
+        //setName('edit-profile');
         setIsEditAvatarPopupOpen(true);
     };
 
     const handleEditProfileClick = () => {
-        setName('type_edit');
+        //setName('type_edit');
         setIsEditProfilePopupOpen(true);
     };
 
     const handleAddPlaceClick = () => {
-        setName('type_add');
+        //setName('type_add');
         setIsAddPlacePopupOpen(true);
     };
 
@@ -109,8 +108,6 @@ function App() {
         setIsEditAvatarPopupOpen(false);
     };
 
-
-
     function handleUpdateUser(userData) {
       
       api.editUserInfo(userData) 
@@ -119,7 +116,7 @@ function App() {
           closeAllPopups();
         })
         .catch(console.error)
-        //.finally(() => renderLoading())
+        .finally(() => renderLoading())
     };
     
     function handleUpdateAvatar(userAvatar) {
@@ -131,10 +128,6 @@ function App() {
         .catch(console.error)
         .finally(() => renderLoading())
     };
-
-
-
-
 
 
   return (
@@ -157,24 +150,25 @@ function App() {
           />
 
           <AddPlacePopup
-            isOpen={isAddPlacePopupOpen}
+          isOpen={isAddPlacePopupOpen}
             onClose={closeAllPopups}
-            name={name}
+            name={'type_add'}
             onAddPlace={handleAddPlaceSubmit}
+            isRenderLoading={isRenderLoading}
           />
 
           <EditAvatarPopup
             isOpen={isEditAvatarPopupOpen}
             onClose={closeAllPopups}
             onUpdateAvatar={handleUpdateAvatar}
-            name={name}
+            name={'edit-profile'}
             isRenderLoading={isRenderLoading}
           />
 
           <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
             onClose={closeAllPopups}
-            name={name}
+            name={'type_edit'}
             onUpdateUser={handleUpdateUser}
             isRenderLoading={isRenderLoading}
           />

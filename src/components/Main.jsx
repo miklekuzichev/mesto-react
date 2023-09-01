@@ -1,30 +1,11 @@
 import React, { useContext } from 'react';
-//import api from '../utils/api.js';
 import Card from './Card';
 import { CurrentUserContext } from '../context/CurrentUserContext.js'
 
 function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardDelete, onCardLike, cards}) {
 
-    //const [userData, setUserData] = React.useState({});
-    //const [cards, setCards] = React.useState([]);
     const currentUser = useContext(CurrentUserContext);
     const { name, about, avatar } = currentUser;
-
-   /*React.useEffect(() => {
-    //
-    // Загрузка готовых карточек и данных о пользователе с сервера
-    //
-        Promise.all([api.getInitialCards(), api.getUserInfo()])
-        .then(([cards, userData]) => {
-            setUserData(userData);
-            setCards(cards);
-        })
-        .catch(console.error);
-
-   }, []);
-
-
-   const { name, about, avatar } = userData;*/
 
     return (
         <main>

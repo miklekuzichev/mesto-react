@@ -1,5 +1,5 @@
 import PopupWithForm from './PopupWithForm';
-import React, { useContext } from "react";
+import React from "react";
 import { CurrentUserContext } from '../context/CurrentUserContext.js'
 
 function EditAvatarPopup(props) {
@@ -17,7 +17,6 @@ function EditAvatarPopup(props) {
             imagelink: avatarRef.current.value // Значение инпута, полученное с помощью рефа
         });
       } 
-
 
     return (
 
