@@ -46,19 +46,29 @@ function App() {
     };
 
 
-
     function handleCardLike(card) {
       const isLiked = card.likes.some(i => i._id === currentUser._id); // Проверяем, есть ли уже лайк на этой карточке
       // Отправляем запрос в API и получаем обновлённые данные карточки
-      api.makeLike(card._id, !isLiked)
-      .then((newCard) => {
+      if(isLiked) {
+        api.deleteLike(card._id)
+        .then((newCard) => {
           setCards((state) => state.map((item) => item._id === card._id ? newCard : item));
-      })
-      .catch(console.error);
+        })
+        .catch(console.error);
+      }
+      else {
+        api.makeLike(card._id)
+        .then((newCard) => {
+          setCards((state) => state.map((item) => item._id === card._id ? newCard : item));
+        })
+        .catch(console.error);
+      }
+      
   } 
 
     function handleCardDelete(card) {
       // Отправляем запрос в API и получаем обновлённые данные карточки
+      console.log('card._id ', card._id);
       api.deleteCard(card._id)
       .then(() => {
           setCards((cards) => cards.filter((item) => item._id !== card));

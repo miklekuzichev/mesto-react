@@ -9,7 +9,7 @@ function Card({card, onCardClick, onCardDelete, onCardLike}) {
 
     // Создаём переменную, которую после зададим в `className` для кнопки лайка
     const cardLikeButtonClassName = ( 
-        `card__like-button ${isLiked && 'card__like-button_active'}` 
+        `card__heart-button ${isLiked && 'card__heart-button-active'}` 
     ); 
 
     function handleClick() {
@@ -33,7 +33,7 @@ function Card({card, onCardClick, onCardDelete, onCardLike}) {
             <h2 className="card__text">{card.name}
             </h2>
             <div className="card__heart-container">
-                <button type="button" className="card__heart-button" onClick={handleLikeClick}></button>
+                <button type="button" className={cardLikeButtonClassName} onClick={handleLikeClick}></button>
                 <span className="card__heart-counter">{card.likes.length}</span>
             </div>
         </div>
